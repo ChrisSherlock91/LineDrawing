@@ -3,6 +3,8 @@
 
 #include "cocos2d.h"
 #include "Slot.h"
+#include <iostream>
+#include <fstream>
 
 class HelloWorld : public cocos2d::Layer
 {
@@ -10,6 +12,7 @@ public:
     const int GRID_SIZE = 128;
     const int PIXEL_SIZE = 10;
     std::vector<std::vector<Slot*>> pixelGrid;
+    std::vector<cocos2d::Vec2> filledPixels;
     
     cocos2d::Vec2 firstPos;
     cocos2d::Vec2 secondPos;
@@ -25,6 +28,8 @@ public:
     void DrawLine(double x0,double x1, double y0, double y1, int wd);
     
     bool Contains(double x, double y);
+    
+    void CreateTextFile();
     
     // there's no 'id' in cpp, so we recommend returning the class instance pointer
     static cocos2d::Scene* createScene();

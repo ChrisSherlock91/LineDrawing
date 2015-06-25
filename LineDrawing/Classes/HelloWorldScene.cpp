@@ -33,9 +33,6 @@ bool HelloWorld::init()
     listener->setSwallowTouches(true);
     
     listener->onTouchBegan = CC_CALLBACK_2(HelloWorld::onTouchBegan, this);
-    //listener->onTouchMoved = CC_CALLBACK_2(HelloWorld::onTouchMoved, this);
-    //listener->onTouchEnded = CC_CALLBACK_2(HelloWorld::onTouchEnded, this);
-    
     _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
     
     
@@ -44,10 +41,7 @@ bool HelloWorld::init()
 
 bool HelloWorld::onTouchBegan(cocos2d::Touch *touch, cocos2d::Event *event)
 {
-    CCLOG("onTouchBegan x = %f, y = %f", touch->getLocation().x, touch->getLocation().y);
-    
     CheckCollision(touch->getLocation());
-    
     return true;
 }
 
@@ -65,17 +59,47 @@ void HelloWorld::CheckCollision(cocos2d::Vec2 pos)
                 {
                     firstPos.x = k;
                     firstPos.y = n;
+                    filledPixels.push_back(cocos2d::Vec2(k,n));
+                    
                 }
                 else
                 {
                     secondPos.x = k;
                     secondPos.y = n;
+                    filledPixels.push_back(cocos2d::Vec2(k,n));
                     DrawLine(firstPos.x,secondPos.x,firstPos.y,secondPos.y,4);
+                    CreateTextFile();
                 }
                 break;
             }
         }
     }
+}
+
+void HelloWorld::CreateTextFile()
+{
+    auto fs = FileUtils::getInstance();
+    auto docDir = fs->getWritablePath();
+    docDir = "/Users/Chris/Documents/Cocos2d-X/LineDrawRepo/LineDrawing/";
+    auto filePath = docDir + "OUTPUT.txt";
+    fs->removeFile(filePath);
+    std::ofstream myfile;
+    myfile.open (filePath);
+    myfile << "Grid Dimension : 128" << std::endl;
+    myfile << "Path Width : 4" << std::endl;
+    myfile << "Start Point : " << std::to_string((int)(filledPixels.at(0).x)) << "," << std::to_string((int)(filledPixels.at(0).y)) << std::endl;
+    myfile << "End Point : " << std::to_string((int)(filledPixels.at(1).x)) << "," << std::to_string((int)(filledPixels.at(1).y)) << std::endl;
+    myfile << "All Other Points Filled : " << std::endl;
+    
+    for(int i = 2; i < filledPixels.size(); ++i)
+    {
+        myfile << std::to_string((int)(filledPixels.at(i).x)) << "," << std::to_string((int)(filledPixels.at(i).y)) << std::endl;
+    }
+    myfile.close();
+    
+    //Empty stored points so we can start for new line
+    filledPixels.clear();
+    
 }
 
 void HelloWorld::DrawLine(double x0,double x1, double y0, double y1, int width)
@@ -113,6 +137,7 @@ void HelloWorld::DrawLine(double x0,double x1, double y0, double y1, int width)
             for (e2 += dy, y2 = y0; e2 < ed * width && (y1 != y2 || dx > dy); e2 += dx)
             //Change current Pixel
             pixelGrid[x0][y2]->ChangeColour();
+            filledPixels.push_back(cocos2d::Vec2(x0,y2));
             //If same tile
             if (x0 == x1) break;
             //Calc new err
@@ -126,6 +151,7 @@ void HelloWorld::DrawLine(double x0,double x1, double y0, double y1, int width)
             for (e2 = dx-e2; e2 < ed*width && (x1 != x2 || dx < dy); e2 += dy)
             //Change current Pixel
             pixelGrid[x2+=sx][y0]->ChangeColour();
+            filledPixels.push_back(cocos2d::Vec2(x2+sx,y0));
             //If same tile
             if (y0 == y1) break;
             //Calc new error
