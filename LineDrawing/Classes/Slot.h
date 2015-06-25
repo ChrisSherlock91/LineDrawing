@@ -16,22 +16,25 @@
 class Slot : public cocos2d::Layer
 {
 protected:
+    //Node used for primitive drawing
     cocos2d::DrawNode *node;
     cocos2d::Vec2 position;
+    //Polygon verts
     cocos2d::Vec2 rectangle[4];
-    const int WIDTH = 10;
+    //Width/Height pf our pixel
+    const int SIZE = 10;
     
 public:
-    
     Slot();
     ~Slot();
     void init(cocos2d::Vec2 pos);
-    void update(float dt);
+    //Draw our square outline
     void Draw();
+    //Change the colour to filled
     void ChangeColour();
-    void ResetColour();
+    //Reset our colour to a border
     bool Contains(double x, double y);
-    cocos2d::Vec2 GetPosition();
+    //Return new slot object
     static Slot* create(cocos2d::Vec2 position);
 };
 

@@ -17,19 +17,15 @@ void Slot::init(cocos2d::Vec2 pos)
     position = pos;
     node = cocos2d::DrawNode::create();
     this->addChild(node);
+    //Draw our Square
     rectangle[0] = cocos2d::Vec2(pos.x,pos.y);
-    rectangle[1] = cocos2d::Vec2(pos.x + WIDTH, pos.y);
-    rectangle[2] = cocos2d::Vec2(pos.x + WIDTH, pos.y + WIDTH);
-    rectangle[3] = cocos2d::Vec2(pos.x, pos.y + WIDTH);
-    //this->scheduleUpdate();
+    rectangle[1] = cocos2d::Vec2(pos.x + SIZE, pos.y);
+    rectangle[2] = cocos2d::Vec2(pos.x + SIZE, pos.y + SIZE);
+    rectangle[3] = cocos2d::Vec2(pos.x, pos.y + SIZE);
     Draw();
 }
 
-void Slot::update(float dt)
-{
-    Draw();
-}
-
+//Fill in our square
 void Slot::ChangeColour()
 {
     cocos2d::Color4F white(1, 1, 1, 1);
@@ -37,14 +33,8 @@ void Slot::ChangeColour()
     node->drawPolygon(rectangle, 4, alpha, 0.5, white);
 }
 
+//Draw our outline
 void Slot::Draw()
-{
-    cocos2d::Color4F white(249, 32, 32, 1);
-    cocos2d::Color4F alpha(249, 32, 32, 0);
-    node->drawPolygon(rectangle, 4, alpha, 0.5, white);
-}
-
-void Slot::ResetColour()
 {
     node->clear();
     cocos2d::Color4F white(249, 32, 32, 1);
@@ -54,19 +44,15 @@ void Slot::ResetColour()
 
 bool Slot::Contains(double x, double y)
 {
-    if (x < (position.x + (.5 * WIDTH)) && x > (position.x - (.5 * WIDTH)) &&
-        y < (position.y + (.5 * WIDTH)) && y > (position.y) - (.5 *WIDTH))
+    //Check if point is inside our square
+    if (x < (position.x + (.5 * SIZE)) && x > (position.x - (.5 * SIZE)) &&
+        y < (position.y + (.5 * SIZE)) && y > (position.y) - (.5 *SIZE))
         return true;
     else
         return false;
 }
 
-
-cocos2d::Vec2 Slot::GetPosition()
-{
-    return position;
-}
-
+//Create and return slot object
 Slot* Slot::create(cocos2d::Vec2 position)
 {
     Slot* pSprite = new Slot();

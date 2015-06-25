@@ -20,18 +20,21 @@ Scene* HelloWorld::createScene()
 // on "init" you need to initialize your instance
 bool HelloWorld::init()
 {
-    //////////////////////////////
-    // 1. super init first
     if ( !Layer::init() )
     {
         return false;
     }
     
+    //Set our default line width
+    lineWidth = 1;
+    
+    //General information label
     auto label = Label::createWithTTF("Please Click Two Points on the grid to draw a line!","fonts/Marker Felt.ttf",50);
     label->setPosition(cocos2d::Vec2(1600,1300));
     label->setWidth(400);
     this->addChild(label);
     
+    //Add Button with callback to clear function
     auto button = cocos2d::ui::Button::create("PlainBtn.png","PlainBtnDwn.png");
     button->setTitleText("Clear Grid");
     button->setTitleColor(cocos2d::Color3B::BLACK);
@@ -58,32 +61,32 @@ bool HelloWorld::init()
     sizeLbl->setWidth(400);
     this->addChild(sizeLbl);
     
-    auto slider = cocos2d::ui::Slider::create();
-    slider->loadBarTexture("Slider_Back.png"); // what the slider looks like
+    //Create our slider to control our line width
+    auto  slider = cocos2d::ui::Slider::create();
+    slider->loadBarTexture("Slider_Back.png");
     slider->loadSlidBallTextures("SliderNode_Normal.png", "SliderNode_Press.png", "SliderNode_Disable.png");
-    slider->loadProgressBarTexture("Slider_PressBar.png");    slider->setPosition(cocos2d::Vec2(1600,1000));
-    
-    slider->addTouchEventListener([&](Ref* sender, cocos2d::ui::Widget::TouchEventType type){
-        switch (type)
-        {
-            case ui::Widget::TouchEventType::BEGAN:
-                break;
-            case ui::Widget::TouchEventType::ENDED:
-                std::cout << "slider moved" << std::endl;
-                break;
-            default:
-                break;
-        }
-    });
-    
+    slider->loadProgressBarTexture("Slider_PressBar.png");
+    slider->setScale9Enabled(true);
+    slider->setCapInsets(Rect(0, 0, 0, 0));
+    slider->setContentSize(Size(250.0f, 19));
+    slider->setPosition(cocos2d::Vec2(1650,950));
+    slider->addEventListener(CC_CALLBACK_2(HelloWorld::SliderEvent, this));
     this->addChild(slider);
     
+    //Label to display our current width
+    widthLbl = Label::createWithTTF("Width : " + std::to_string(lineWidth),"fonts/Marker Felt.ttf",30);
+    widthLbl->setPosition(cocos2d::Vec2(1650,1000));
+    widthLbl->setWidth(400);
+    this->addChild(widthLbl);
     
+    //Create our grid of pixels
     CreatePixelGrid();
 
+    //Add touch listenr
     auto listener = EventListenerTouchOneByOne::create();
     listener->setSwallowTouches(true);
     
+    //Set touch callback when we begin a touch
     listener->onTouchBegan = CC_CALLBACK_2(HelloWorld::onTouchBegan, this);
     _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
     
@@ -91,35 +94,64 @@ bool HelloWorld::init()
     return true;
 }
 
+//Used to update our line width called when we move our slider
+void HelloWorld::SliderEvent(cocos2d::Ref *pSender, cocos2d::ui::Slider::EventType type)
+{
+    if (type == cocos2d::ui::Slider::EventType::ON_PERCENTAGE_CHANGED)
+    {
+        //Get slider object
+        cocos2d::ui::Slider* slider = dynamic_cast<cocos2d::ui::Slider*>(pSender);
+        int percent = slider->getPercent();
+
+        //Dont let it be 0
+        if(percent == 0)
+        {
+            lineWidth = 1;
+        }
+        else
+        {
+            //Only want small incrments dont want massive lines
+            lineWidth = percent / 10;
+        }
+        //Update our label with our new width
+        widthLbl->setString("Width : " + std::to_string(lineWidth));
+    }
+}
+
 void HelloWorld::ClearGrid()
 {
+    //loop grid and reset every colour
     for(int k = 0; k < GRID_SIZE; ++k)
     {
         for(int n = 0; n < GRID_SIZE; ++n)
         {
-            pixelGrid[k][n]->ResetColour();
+            pixelGrid[k][n]->Draw();
         }
     }
 }
 
 bool HelloWorld::onTouchBegan(cocos2d::Touch *touch, cocos2d::Event *event)
 {
+    //Check which pixel we collided with
     CheckCollision(touch->getLocation());
     return true;
 }
 
 void HelloWorld::CheckCollision(cocos2d::Vec2 pos)
 {
-
+    //Loop and check for collision
     for(int k = 0; k < GRID_SIZE; ++k)
     {
         for(int n = 0; n < GRID_SIZE; ++n)
         {
             if(pixelGrid[k][n]->Contains(pos.x, pos.y))
             {
+                //Change the colour
                 pixelGrid[k][n]->ChangeColour();
+                //if its the first point in the line
                 if(firstPos.x == 0)
                 {
+                    //store the position and fill pixel
                     firstPos.x = k;
                     firstPos.y = n;
                     filledPixels.push_back(cocos2d::Vec2(k,n));
@@ -127,10 +159,13 @@ void HelloWorld::CheckCollision(cocos2d::Vec2 pos)
                 }
                 else
                 {
+                    //its the second point we have picked
                     secondPos.x = k;
                     secondPos.y = n;
                     filledPixels.push_back(cocos2d::Vec2(k,n));
-                    DrawLine(firstPos.x,secondPos.x,firstPos.y,secondPos.y,4);
+                    //Draw our line between the points
+                    DrawLine(firstPos.x,secondPos.x,firstPos.y,secondPos.y,lineWidth);
+                    //Now create our output file
                     CreateTextFile();
                 }
                 break;
@@ -141,19 +176,31 @@ void HelloWorld::CheckCollision(cocos2d::Vec2 pos)
 
 void HelloWorld::CreateTextFile()
 {
+    
     auto fs = FileUtils::getInstance();
     auto docDir = fs->getWritablePath();
+    //PLEASE CHANGE THIS LINE TO YOUR LOCAL DIRECTORY OR WHEREVER YOU WANT THE FILE TO BE GENERATED
+    //*********************************************************************************************
+    //*********************************************************************************************
+    //*********************************************************************************************
     docDir = "/Users/Chris/Documents/Cocos2d-X/LineDrawRepo/LineDrawing/";
+    //*********************************************************************************************
+    //*********************************************************************************************
+    //*********************************************************************************************
     auto filePath = docDir + "OUTPUT.txt";
+    //Remove old file
     fs->removeFile(filePath);
+    //open our new file
     std::ofstream myfile;
     myfile.open (filePath);
+    //Write into the stream our information
     myfile << "Grid Dimension : 128" << std::endl;
-    myfile << "Path Width : 4" << std::endl;
+    myfile << "Path Width : " << std::to_string(lineWidth) << std::endl;
     myfile << "Start Point : " << std::to_string((int)(filledPixels.at(0).x)) << "," << std::to_string((int)(filledPixels.at(0).y)) << std::endl;
     myfile << "End Point : " << std::to_string((int)(filledPixels.at(1).x)) << "," << std::to_string((int)(filledPixels.at(1).y)) << std::endl;
     myfile << "All Other Points Filled : " << std::endl;
     
+    //Loop all stored pixels and write them to the file
     for(int i = 2; i < filledPixels.size(); ++i)
     {
         myfile << std::to_string((int)(filledPixels.at(i).x)) << "," << std::to_string((int)(filledPixels.at(i).y)) << std::endl;
