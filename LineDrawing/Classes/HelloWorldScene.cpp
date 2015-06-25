@@ -27,6 +27,58 @@ bool HelloWorld::init()
         return false;
     }
     
+    auto label = Label::createWithTTF("Please Click Two Points on the grid to draw a line!","fonts/Marker Felt.ttf",50);
+    label->setPosition(cocos2d::Vec2(1600,1300));
+    label->setWidth(400);
+    this->addChild(label);
+    
+    auto button = cocos2d::ui::Button::create("PlainBtn.png","PlainBtnDwn.png");
+    button->setTitleText("Clear Grid");
+    button->setTitleColor(cocos2d::Color3B::BLACK);
+    button->setTitleFontSize(40);
+    button->cocos2d::Node::setScale(1, 1);
+    button->setPosition(Vec2(1600,500));
+    button->addTouchEventListener([&](Ref* sender, cocos2d::ui::Widget::TouchEventType type)
+    {
+        switch (type)
+        {
+            case ui::Widget::TouchEventType::BEGAN:
+                break;
+            case ui::Widget::TouchEventType::ENDED:
+                HelloWorld::ClearGrid();
+                break;
+            default:
+                break;
+        }
+    });
+    this->addChild(button);
+    
+    auto sizeLbl = Label::createWithTTF("Please Set the width of your line","fonts/Marker Felt.ttf",30);
+    sizeLbl->setPosition(cocos2d::Vec2(1650,1050));
+    sizeLbl->setWidth(400);
+    this->addChild(sizeLbl);
+    
+    auto slider = cocos2d::ui::Slider::create();
+    slider->loadBarTexture("Slider_Back.png"); // what the slider looks like
+    slider->loadSlidBallTextures("SliderNode_Normal.png", "SliderNode_Press.png", "SliderNode_Disable.png");
+    slider->loadProgressBarTexture("Slider_PressBar.png");    slider->setPosition(cocos2d::Vec2(1600,1000));
+    
+    slider->addTouchEventListener([&](Ref* sender, cocos2d::ui::Widget::TouchEventType type){
+        switch (type)
+        {
+            case ui::Widget::TouchEventType::BEGAN:
+                break;
+            case ui::Widget::TouchEventType::ENDED:
+                std::cout << "slider moved" << std::endl;
+                break;
+            default:
+                break;
+        }
+    });
+    
+    this->addChild(slider);
+    
+    
     CreatePixelGrid();
 
     auto listener = EventListenerTouchOneByOne::create();
@@ -37,6 +89,17 @@ bool HelloWorld::init()
     
     
     return true;
+}
+
+void HelloWorld::ClearGrid()
+{
+    for(int k = 0; k < GRID_SIZE; ++k)
+    {
+        for(int n = 0; n < GRID_SIZE; ++n)
+        {
+            pixelGrid[k][n]->ResetColour();
+        }
+    }
 }
 
 bool HelloWorld::onTouchBegan(cocos2d::Touch *touch, cocos2d::Event *event)

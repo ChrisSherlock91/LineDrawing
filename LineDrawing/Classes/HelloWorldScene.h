@@ -3,6 +3,7 @@
 
 #include "cocos2d.h"
 #include "Slot.h"
+#include "ui/CocosGUI.h"
 #include <iostream>
 #include <fstream>
 
@@ -20,9 +21,6 @@ public:
     void CreatePixelGrid();
     
     bool onTouchBegan(cocos2d::Touch *touch, cocos2d::Event * event);
-    //void onTouchMoved(cocos2d::Touch *touch, cocos2d::Event * event);
-    //void onTouchEnded(cocos2d::Touch *touch, cocos2d::Event * event);
-    
     void CheckCollision(cocos2d::Vec2 pos);
     
     void DrawLine(double x0,double x1, double y0, double y1, int wd);
@@ -30,6 +28,8 @@ public:
     bool Contains(double x, double y);
     
     void CreateTextFile();
+    
+    void ClearGrid();
     
     // there's no 'id' in cpp, so we recommend returning the class instance pointer
     static cocos2d::Scene* createScene();

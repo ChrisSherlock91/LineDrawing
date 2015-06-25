@@ -44,6 +44,14 @@ void Slot::Draw()
     node->drawPolygon(rectangle, 4, alpha, 0.5, white);
 }
 
+void Slot::ResetColour()
+{
+    node->clear();
+    cocos2d::Color4F white(249, 32, 32, 1);
+    cocos2d::Color4F alpha(249, 32, 32, 0);
+    node->drawPolygon(rectangle, 4, alpha, 0.5, white);
+}
+
 bool Slot::Contains(double x, double y)
 {
     if (x < (position.x + (.5 * WIDTH)) && x > (position.x - (.5 * WIDTH)) &&

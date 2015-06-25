@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>34CCE117-4030-4259-B07C-092B06180EE7</string>
+	<key>IDESourceControlProjectName</key>
+	<string>LineDrawing</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>01D628A26FBC1542745A8A1D39776B48DDBAA59D</key>
+		<string>https://github.com/ChrisSherlock91/LineDrawing.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>LineDrawing/proj.ios_mac/LineDrawing.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>01D628A26FBC1542745A8A1D39776B48DDBAA59D</key>
+		<string>../../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/ChrisSherlock91/LineDrawing.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>01D628A26FBC1542745A8A1D39776B48DDBAA59D</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>01D628A26FBC1542745A8A1D39776B48DDBAA59D</string>
+			<key>IDESourceControlWCCName</key>
+			<string>LineDrawRepo</string>
+		</dict>
+	</array>
+</dict>
+</plist>

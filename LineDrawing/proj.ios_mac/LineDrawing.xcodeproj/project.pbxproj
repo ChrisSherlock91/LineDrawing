@@ -61,6 +61,12 @@
 		52B47A471A53D09C004E4C60 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52B47A461A53D09B004E4C60 /* Security.framework */; };
 		8262943E1AAF051F00CB7CF7 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8262943D1AAF051F00CB7CF7 /* Security.framework */; };
 		839C08671B3BF07A009E2BD1 /* Slot.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 839C08651B3BF07A009E2BD1 /* Slot.cpp */; };
+		839C086F1B3C34F5009E2BD1 /* PlainBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 839C086D1B3C34F5009E2BD1 /* PlainBtn.png */; };
+		839C08701B3C34F5009E2BD1 /* PlainBtnDwn.png in Resources */ = {isa = PBXBuildFile; fileRef = 839C086E1B3C34F5009E2BD1 /* PlainBtnDwn.png */; };
+		839C087B1B3C3958009E2BD1 /* Slider_Back.png in Resources */ = {isa = PBXBuildFile; fileRef = 839C08771B3C3958009E2BD1 /* Slider_Back.png */; };
+		839C087C1B3C3958009E2BD1 /* SliderNode_Disable.png in Resources */ = {isa = PBXBuildFile; fileRef = 839C08781B3C3958009E2BD1 /* SliderNode_Disable.png */; };
+		839C087D1B3C3958009E2BD1 /* SliderNode_Normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 839C08791B3C3958009E2BD1 /* SliderNode_Normal.png */; };
+		839C087E1B3C3958009E2BD1 /* SliderNode_Press.png in Resources */ = {isa = PBXBuildFile; fileRef = 839C087A1B3C3958009E2BD1 /* SliderNode_Press.png */; };
 		BF171245129291EC00B8313A /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB012928DE900B8313A /* OpenGLES.framework */; };
 		BF1712471292920000B8313A /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB412928DE900B8313A /* libz.dylib */; };
 		BF1C47F01293687400B63C5D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF1C47EA1293683800B63C5D /* QuartzCore.framework */; };
@@ -155,6 +161,12 @@
 		8262943D1AAF051F00CB7CF7 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		839C08651B3BF07A009E2BD1 /* Slot.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Slot.cpp; sourceTree = "<group>"; };
 		839C08661B3BF07A009E2BD1 /* Slot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Slot.h; sourceTree = "<group>"; };
+		839C086D1B3C34F5009E2BD1 /* PlainBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PlainBtn.png; sourceTree = "<group>"; };
+		839C086E1B3C34F5009E2BD1 /* PlainBtnDwn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PlainBtnDwn.png; sourceTree = "<group>"; };
+		839C08771B3C3958009E2BD1 /* Slider_Back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Slider_Back.png; sourceTree = "<group>"; };
+		839C08781B3C3958009E2BD1 /* SliderNode_Disable.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SliderNode_Disable.png; sourceTree = "<group>"; };
+		839C08791B3C3958009E2BD1 /* SliderNode_Normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SliderNode_Normal.png; sourceTree = "<group>"; };
+		839C087A1B3C3958009E2BD1 /* SliderNode_Press.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SliderNode_Press.png; sourceTree = "<group>"; };
 		BF170DB012928DE900B8313A /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		BF170DB412928DE900B8313A /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		BF1C47EA1293683800B63C5D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -279,6 +291,12 @@
 		46880B7519C43A67006E1F66 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				839C08771B3C3958009E2BD1 /* Slider_Back.png */,
+				839C08781B3C3958009E2BD1 /* SliderNode_Disable.png */,
+				839C08791B3C3958009E2BD1 /* SliderNode_Normal.png */,
+				839C087A1B3C3958009E2BD1 /* SliderNode_Press.png */,
+				839C086D1B3C34F5009E2BD1 /* PlainBtn.png */,
+				839C086E1B3C34F5009E2BD1 /* PlainBtnDwn.png */,
 				521A8EA819F11F5000D177D7 /* fonts */,
 				3EACC98E19EE6D4300EB3C5E /* res */,
 				46880B7619C43A67006E1F66 /* CloseNormal.png */,
@@ -452,18 +470,22 @@
 			files = (
 				5087E78117EB970100C73F5D /* Icon-120.png in Resources */,
 				5087E78617EB970100C73F5D /* Icon-76.png in Resources */,
+				839C087C1B3C3958009E2BD1 /* SliderNode_Disable.png in Resources */,
 				5087E77F17EB970100C73F5D /* Default@2x.png in Resources */,
 				50EF629917ECD46A001EB2F8 /* Icon-100.png in Resources */,
 				5087E78317EB970100C73F5D /* Icon-152.png in Resources */,
 				46880B8119C43A67006E1F66 /* HelloWorld.png in Resources */,
+				839C08701B3C34F5009E2BD1 /* PlainBtnDwn.png in Resources */,
 				46880B7D19C43A67006E1F66 /* CloseSelected.png in Resources */,
 				5087E77D17EB970100C73F5D /* Default-568h@2x.png in Resources */,
 				5087E78517EB970100C73F5D /* Icon-72.png in Resources */,
 				521A8E6519F0C34300D177D7 /* Default-736h@3x.png in Resources */,
 				521A8EA919F11F5000D177D7 /* fonts in Resources */,
 				50EF62A317ECD613001EB2F8 /* Icon-50.png in Resources */,
+				839C087B1B3C3958009E2BD1 /* Slider_Back.png in Resources */,
 				5087E78017EB970100C73F5D /* Icon-114.png in Resources */,
 				50EF62A217ECD613001EB2F8 /* Icon-29.png in Resources */,
+				839C087D1B3C3958009E2BD1 /* SliderNode_Normal.png in Resources */,
 				50EF629617ECD46A001EB2F8 /* Icon-40.png in Resources */,
 				5087E78217EB970100C73F5D /* Icon-144.png in Resources */,
 				3EACC98F19EE6D4300EB3C5E /* res in Resources */,
@@ -471,6 +493,8 @@
 				5087E78417EB970100C73F5D /* Icon-57.png in Resources */,
 				5087E77E17EB970100C73F5D /* Default.png in Resources */,
 				521A8E6419F0C34300D177D7 /* Default-667h@2x.png in Resources */,
+				839C086F1B3C34F5009E2BD1 /* PlainBtn.png in Resources */,
+				839C087E1B3C3958009E2BD1 /* SliderNode_Press.png in Resources */,
 				46880B7B19C43A67006E1F66 /* CloseNormal.png in Resources */,
 				50EF629717ECD46A001EB2F8 /* Icon-58.png in Resources */,
 			);
