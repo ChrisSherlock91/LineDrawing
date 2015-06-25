@@ -29,6 +29,7 @@ public:
     void update(float dt);
     void Draw();
     void ChangeColour();
+    bool Contains(double x, double y);
     cocos2d::Vec2 GetPosition();
     static Slot* create(cocos2d::Vec2 position);
 };

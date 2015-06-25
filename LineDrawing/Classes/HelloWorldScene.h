@@ -11,6 +11,21 @@ public:
     const int PIXEL_SIZE = 10;
     std::vector<std::vector<Slot*>> pixelGrid;
     
+    cocos2d::Vec2 firstPos;
+    cocos2d::Vec2 secondPos;
+    
+    void CreatePixelGrid();
+    
+    bool onTouchBegan(cocos2d::Touch *touch, cocos2d::Event * event);
+    //void onTouchMoved(cocos2d::Touch *touch, cocos2d::Event * event);
+    //void onTouchEnded(cocos2d::Touch *touch, cocos2d::Event * event);
+    
+    void CheckCollision(cocos2d::Vec2 pos);
+    
+    void DrawLine(double x0,double x1, double y0, double y1, int wd);
+    
+    bool Contains(double x, double y);
+    
     // there's no 'id' in cpp, so we recommend returning the class instance pointer
     static cocos2d::Scene* createScene();
 

@@ -39,10 +39,20 @@ void Slot::ChangeColour()
 
 void Slot::Draw()
 {
-    cocos2d::Color4F white(1, 1, 1, 1);
-    cocos2d::Color4F alpha(1, 1, 1, 0);
+    cocos2d::Color4F white(249, 32, 32, 1);
+    cocos2d::Color4F alpha(249, 32, 32, 0);
     node->drawPolygon(rectangle, 4, alpha, 0.5, white);
 }
+
+bool Slot::Contains(double x, double y)
+{
+    if (x < (position.x + (.5 * WIDTH)) && x > (position.x - (.5 * WIDTH)) &&
+        y < (position.y + (.5 * WIDTH)) && y > (position.y) - (.5 *WIDTH))
+        return true;
+    else
+        return false;
+}
+
 
 cocos2d::Vec2 Slot::GetPosition()
 {
