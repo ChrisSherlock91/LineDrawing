@@ -2,10 +2,15 @@
 #define __HELLOWORLD_SCENE_H__
 
 #include "cocos2d.h"
+#include "Slot.h"
 
 class HelloWorld : public cocos2d::Layer
 {
 public:
+    const int GRID_SIZE = 128;
+    const int PIXEL_SIZE = 10;
+    std::vector<std::vector<Slot*>> pixelGrid;
+    
     // there's no 'id' in cpp, so we recommend returning the class instance pointer
     static cocos2d::Scene* createScene();
 
